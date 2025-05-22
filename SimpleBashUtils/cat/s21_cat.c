@@ -3,6 +3,9 @@
 #include <stdbool.h>
 #include <string.h>
 
+void process_num_all(FILE *file);
+void print_file_counters(FILE *file);
+
 
 enum { FLAG_B = 0, FLAG_E, FLAG_N, FLAG_S, FLAG_T, FLAG_COUNT };
 
@@ -81,6 +84,28 @@ int main(int argc, char **argv){
 
     if(no_flags){
 
+    }else{
+
+        if(flags[FLAG_N]){
+            rewind(file);
+            process_num_all(file);
+        }
+        if(flags[FLAG_B]){
+            rewind(file);
+            
+        }
+        if(flags[FLAG_E]){
+            rewind(file);
+            
+        }
+        if(flags[FLAG_S]){
+            rewind(file);
+            
+        }
+        if(flags[FLAG_T]){
+            rewind(file);
+            
+        }
     }
 
     fclose(filename);
@@ -91,3 +116,22 @@ int main(int argc, char **argv){
     return 0;
 }
 
+void process_num_all(FILE *file){
+    char line [4096];
+    int line_num = 1;
+    while(fgets(line, sizeof(line), file)){
+        if(line[0]!="\n"){
+            printf("%6d\t%s", line_num++, line);
+        }
+        else{
+            printf("%s", line);
+        }
+    }
+}
+
+void print_file_counters(FILE *file){
+    char ch;
+    while((ch = fgets(file))!=EOF){
+        putchar(ch);
+    }
+}
