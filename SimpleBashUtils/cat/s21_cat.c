@@ -4,8 +4,10 @@
 #include <string.h>
 
 void process_num_all(FILE *file);
+void process_num_zero(FILE *file);
 void print_file_counters(FILE *file);
-
+void process_show_ends(FILE *file);
+void process_show_tab(FILE *file);
 
 enum { FLAG_B = 0, FLAG_E, FLAG_N, FLAG_S, FLAG_T, FLAG_COUNT };
 
@@ -92,11 +94,11 @@ int main(int argc, char **argv){
         }
         if(flags[FLAG_B]){
             rewind(file);
-            
+            process_num_zero(file);
         }
         if(flags[FLAG_E]){
             rewind(file);
-            
+            process_show_ends(file);
         }
         if(flags[FLAG_S]){
             rewind(file);
@@ -104,7 +106,7 @@ int main(int argc, char **argv){
         }
         if(flags[FLAG_T]){
             rewind(file);
-            
+            process_show_tab(file);
         }
     }
 
@@ -117,6 +119,14 @@ int main(int argc, char **argv){
 }
 
 void process_num_all(FILE *file){
+    char line[4096];
+    int line_num = 1;
+    while(fgets(line, sizeof(line), file)){
+        printf("6d\t%s", line_num++, line);
+    }
+}
+
+void process_num_zero(FILE *file){
     char line [4096];
     int line_num = 1;
     while(fgets(line, sizeof(line), file)){
@@ -133,5 +143,30 @@ void print_file_counters(FILE *file){
     char ch;
     while((ch = fgets(file))!=EOF){
         putchar(ch);
+    }
+}
+
+void process_show_ends(FILE *file){
+    char ch;
+    while((ch = fgets(file))!= EOF){
+        if(ch == "\n"){
+            printf("$\n");
+        }else{
+            putchar(ch);
+        }
+    }
+}
+
+void process_shaw_tab(FILE *file){
+    char ch;
+    while((ch =fgets(file))!=EOF){
+        if(ch == '\t'){
+            printf("^I");
+        }
+        if(ch == "\n"){
+            printf("\n");
+        }else{
+            putchar(ch);
+        }
     }
 }
