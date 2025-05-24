@@ -3,7 +3,7 @@ TARGET = s21_cat
 CC = gcc
 CFLAGS = -Werror -Wall -Wextra -std=c11 -std=c11
 
-SRC = cat.c
+SRC = s21_cat.c
 
 s21_cat: $(TARGET)
 
