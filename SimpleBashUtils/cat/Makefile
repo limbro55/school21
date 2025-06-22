@@ -11,6 +11,6 @@ $(TARGET): $(SRC)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
 
 clean: 
-	rm -rf: $(TARGET)
+	rm -rf $(TARGET)
 
 rebuild: clean all
